@@ -10,7 +10,10 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody2D rb;
 
+    public bool isOnGround;
+
     public float moveSpeed;
+    public float jumpPower;
 
     private Vector3 moveVector;
 
@@ -24,9 +27,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Jump
-        if (Input.GetKey(jumpInput))
+        if (Input.GetKey(jumpInput) && isOnGround)
         {
-            rb.AddForce(Vector2.up, ForceMode2D.Impulse);
+            rb.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
+            isOnGround = false;
         }
 
         //Left and right
@@ -38,6 +42,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(rightInput))
         {
             transform.position += moveVector;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Platform"))
+        {
+            isOnGround = true;
         }
     }
 }
