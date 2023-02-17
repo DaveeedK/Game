@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(rb.velocity.y);
+
         //Jump
         if (Input.GetKey(jumpInput) && isOnGround)
         {
@@ -47,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Platform"))
+        if (collision.gameObject.CompareTag("Platform") && rb.velocity.y <= 1)
         {
             isOnGround = true;
         }
