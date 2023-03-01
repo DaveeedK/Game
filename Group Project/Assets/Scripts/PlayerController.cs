@@ -52,7 +52,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Platform"))
+        //Ensure player can't double bounce off corners
+        if (collision.gameObject.CompareTag("Platform") && rb.velocity.y <= 1)
         {
             isOnGround = true;
         }
