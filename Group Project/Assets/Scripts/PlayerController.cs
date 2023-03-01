@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Jump
+      
+    }
+
+    private void FixedUpdate()
+    {
         if (Input.GetKey(jumpInput) && isOnGround)
         {
             rb.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
