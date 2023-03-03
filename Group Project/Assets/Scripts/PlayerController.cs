@@ -15,12 +15,10 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float jumpPower;
 
-    private Vector3 moveVector;
-
     // Start is called before the first frame update
     void Start()
     {
-        moveVector = new Vector3(1 * moveSpeed * Time.deltaTime, 0, 0);
+       
     }
 
     // Update is called once per frame
@@ -32,6 +30,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        /*if (!Input.anyKey)
+        {
+            rb.velocity;
+        }*/
         if (Input.GetKey(jumpInput) && isOnGround)
         {
             rb.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
@@ -41,12 +43,14 @@ public class PlayerController : MonoBehaviour
         //Left and right
         if (Input.GetKey(leftInput))
         {
-            transform.position -= moveVector;
+            rb.AddForce(Vector3.left * moveSpeed);
+            //transform.position -= moveVector;
         }
 
         if (Input.GetKey(rightInput))
         {
-            transform.position += moveVector;
+            rb.AddForce(Vector3.right * moveSpeed);
+            //transform.position += moveVector;
         }
     }
 
