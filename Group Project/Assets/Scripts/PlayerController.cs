@@ -24,16 +24,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Jump
       
     }
 
     private void FixedUpdate()
     {
-        /*if (!Input.anyKey)
+        if (!Input.GetKey(leftInput) || !Input.GetKey(rightInput))
         {
-            rb.velocity;
-        }*/
+            rb.velocity = new Vector2(0f, rb.velocity.y);
+        }
+
         if (Input.GetKey(jumpInput) && isOnGround)
         {
             rb.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
@@ -43,14 +43,12 @@ public class PlayerController : MonoBehaviour
         //Left and right
         if (Input.GetKey(leftInput))
         {
-            rb.AddForce(Vector3.left * moveSpeed);
-            //transform.position -= moveVector;
+            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
         }
 
         if (Input.GetKey(rightInput))
         {
-            rb.AddForce(Vector3.right * moveSpeed);
-            //transform.position += moveVector;
+            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
         }
     }
 
