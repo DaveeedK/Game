@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController1 : MonoBehaviour
 {
-    public KeyCode jumpInput;
-    public KeyCode leftInput;
-    public KeyCode rightInput;
+    private KeyCode jumpInput = KeyCode.W;
+    private KeyCode leftInput = KeyCode.A;
+    private KeyCode rightInput = KeyCode.D;
 
     private Player1Dash dashScript;
 
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(0f, rb.velocity.y);
         }
 
-        if (Input.GetKey(jumpInput) && isOnGround)
+        if (Input.GetKey(jumpInput) && isOnGround && rb.velocity.y == 0)
         {
             rb.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
             isOnGround = false;
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Ensure player can't double bounce off corners
-        if ((collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Player")) && rb.velocity.y == 0)
+        if ((collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Player")))
         {
             isOnGround = true;
         }

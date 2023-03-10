@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player1Dash : MonoBehaviour
+public class Player2Dash : MonoBehaviour
 {
     public Rigidbody2D rb;
 
-    private KeyCode dashInput = KeyCode.LeftShift;
+    private KeyCode dashInput = KeyCode.RightShift;
 
     private bool canDash = true;
     private bool isDashing;
