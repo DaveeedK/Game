@@ -8,7 +8,7 @@ public class Player1Dash : MonoBehaviour
 
     private bool canDash = true;
     private bool isDashing;
-    private float dashingPower = 50f;
+    public float dashingMultiplier = 1f;
     private float dashingTime = 0.5f;
     private float dashingCooldown = 0.5f;
 
@@ -47,13 +47,14 @@ public class Player1Dash : MonoBehaviour
         canDash = false;
         isDashing = true;
         float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        rb.gravityScale = 3f;
         tr.emitting = true;
+        dashingMultiplier = 3f;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
         rb.gravityScale = originalGravity;
         isDashing = false;
+        dashingMultiplier = 1f;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
     }

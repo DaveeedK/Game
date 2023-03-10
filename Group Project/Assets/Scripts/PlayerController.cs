@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public KeyCode leftInput;
     public KeyCode rightInput;
 
+    private Player1Dash dashScript;
+
     public Rigidbody2D rb;
 
     public bool isOnGround;
@@ -18,7 +20,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        dashScript = GetComponent<Player1Dash>();
     }
 
     // Update is called once per frame
@@ -43,12 +45,12 @@ public class PlayerController : MonoBehaviour
         //Left and right
         if (Input.GetKey(leftInput))
         {
-            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(-moveSpeed * dashScript.dashingMultiplier, rb.velocity.y);
         }
 
         if (Input.GetKey(rightInput))
         {
-            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(moveSpeed * dashScript.dashingMultiplier, rb.velocity.y);
         }
     }
 
