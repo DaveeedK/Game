@@ -12,7 +12,7 @@ public class PlayerController1 : MonoBehaviour
 
     public Rigidbody2D rb;
 
-    public bool isOnGround;
+    public bool isJumping;
 
     public float moveSpeed;
     public float jumpPower;
@@ -36,10 +36,10 @@ public class PlayerController1 : MonoBehaviour
             rb.velocity = new Vector2(0f, rb.velocity.y);
         }
 
-        if (Input.GetKey(jumpInput) && isOnGround && rb.velocity.y == 0)
+        if (Input.GetKey(jumpInput) && !isJumping)
         {
             rb.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
-            isOnGround = false;
+            isJumping = true;
         }
 
         //Left and right
@@ -59,7 +59,7 @@ public class PlayerController1 : MonoBehaviour
         //Ensure player can't double bounce off corners
         if ((collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Player")))
         {
-            isOnGround = true;
+            isJumping = false;
         }
     }
 }
